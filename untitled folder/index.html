@@ -1,0 +1,2309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Segno — ASL</title>
+
+  <!-- =========================
+       GOOGLE FONTS
+  ========================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =========================
+       MEDIAPIPE
+  ========================== -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+  ></script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+  ></script>
+
+
+  <!-- =========================
+       STYLE
+  ========================== -->
+
+  <style>
+
+    /* =========================================
+       COLORS
+    ========================================= */
+
+    :root {
+
+      --cream: #f6ead5;
+
+      --paper: #fff8e9;
+
+      --terracotta: #b75b3f;
+
+      --terracotta-dark: #7e3528;
+
+      --wine: #642d2d;
+
+      --olive: #68704a;
+
+      --olive-dark: #3f472e;
+
+      --mustard: #c4943d;
+
+      --brown: #34231d;
+
+      --brown-light: #61473b;
+
+      --gold: #d2a95c;
+
+      --rose: #c98776;
+
+      --shadow:
+        rgba(52, 35, 29, 0.22);
+
+    }
+
+
+    /* =========================================
+       RESET
+    ========================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      color: var(--brown);
+
+      font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+
+      background:
+
+        radial-gradient(
+          circle at 8% 10%,
+          rgba(183, 91, 63, 0.28),
+          transparent 22%
+        ),
+
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(104, 112, 74, 0.24),
+          transparent 23%
+        ),
+
+        radial-gradient(
+          circle at 50% 90%,
+          rgba(196, 148, 61, 0.18),
+          transparent 25%
+        ),
+
+        var(--cream);
+
+      overflow-x: hidden;
+    }
+
+
+    /* =========================================
+       DECORATIVE BACKGROUND
+    ========================================= */
+
+    body::before {
+
+      content: "";
+
+      position: fixed;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.22;
+
+      background-image:
+
+        radial-gradient(
+          rgba(52, 35, 29, 0.35) 0.7px,
+          transparent 0.7px
+        );
+
+      background-size: 8px 8px;
+
+      mix-blend-mode: multiply;
+
+      z-index: -1;
+    }
+
+
+    /* =========================================
+       FLOATING DECORATIONS
+    ========================================= */
+
+    .leaf {
+
+      position: fixed;
+
+      pointer-events: none;
+
+      font-size: 70px;
+
+      opacity: 0.13;
+
+      z-index: -1;
+
+      user-select: none;
+    }
+
+
+    .leaf.one {
+
+      top: 8%;
+
+      left: -15px;
+
+      transform: rotate(-25deg);
+    }
+
+
+    .leaf.two {
+
+      top: 42%;
+
+      right: -15px;
+
+      transform: rotate(25deg);
+    }
+
+
+    .leaf.three {
+
+      bottom: 5%;
+
+      left: 5%;
+
+      font-size: 50px;
+
+      transform: rotate(15deg);
+    }
+
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .page {
+
+      width: min(1250px, 92%);
+
+      margin: auto;
+
+      padding:
+        28px
+        0
+        70px;
+    }
+
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    header {
+
+      position: relative;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      padding-bottom: 25px;
+
+      border-bottom:
+        2px solid
+        rgba(100, 45, 45, 0.25);
+    }
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+    }
+
+
+    .brand-mark {
+
+      width: 48px;
+
+      height: 48px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background:
+        var(--terracotta);
+
+      color: white;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 28px;
+
+      box-shadow:
+        5px 5px 0 var(--wine);
+    }
+
+
+    .brand-name {
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 35px;
+
+      font-weight: 600;
+
+      line-height: 0.8;
+    }
+
+
+    .brand-name span {
+
+      color:
+        var(--terracotta);
+    }
+
+
+    .header-tag {
+
+      padding:
+        9px
+        16px;
+
+      border:
+        1px solid
+        rgba(100, 45, 45, 0.35);
+
+      border-radius: 999px;
+
+      color:
+        var(--wine);
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+
+      background:
+        rgba(255,255,255,0.28);
+    }
+
+
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero {
+
+      position: relative;
+
+      padding:
+        70px
+        0
+        45px;
+
+      text-align: center;
+    }
+
+
+    .eyebrow {
+
+      display: inline-block;
+
+      margin-bottom: 15px;
+
+      color:
+        var(--terracotta);
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+      letter-spacing: 0.28em;
+
+      text-transform: uppercase;
+    }
+
+
+    .hero h1 {
+
+      margin: 0;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size:
+        clamp(65px, 10vw, 125px);
+
+      line-height: 0.76;
+
+      font-weight: 500;
+
+      color:
+        var(--wine);
+
+      text-shadow:
+        2px 2px 0
+        rgba(196,148,61,0.25);
+    }
+
+
+    .hero h1 em {
+
+      color:
+        var(--terracotta);
+
+      font-style: italic;
+    }
+
+
+    .hero p {
+
+      max-width: 650px;
+
+      margin:
+        30px
+        auto
+        0;
+
+      color:
+        var(--brown-light);
+
+      font-size: 16px;
+
+      line-height: 1.75;
+    }
+
+
+    /* =========================================
+       DECORATIVE ORNAMENT
+    ========================================= */
+
+    .ornament {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 12px;
+
+      margin:
+        20px
+        auto
+        0;
+
+      color:
+        var(--mustard);
+    }
+
+
+    .ornament::before,
+    .ornament::after {
+
+      content: "";
+
+      width: 80px;
+
+      height: 1px;
+
+      background:
+        var(--mustard);
+    }
+
+
+    /* =========================================
+       CAMERA FRAME
+    ========================================= */
+
+    .camera-wrapper {
+
+      position: relative;
+
+      padding: 14px;
+
+      border-radius: 32px;
+
+      background:
+        var(--wine);
+
+      box-shadow:
+        15px 18px 0
+        rgba(100,45,45,0.17),
+        0 30px 70px
+        var(--shadow);
+    }
+
+
+    .camera-wrapper::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 6px;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+      border-radius: 26px;
+
+      pointer-events: none;
+
+      z-index: 10;
+    }
+
+
+    .camera {
+
+      position: relative;
+
+      overflow: hidden;
+
+      width: 100%;
+
+      aspect-ratio: 16 / 9;
+
+      border-radius: 21px;
+
+      background:
+        #201714;
+    }
+
+
+    /* =========================================
+       VIDEO
+    ========================================= */
+
+    #video {
+
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      transform:
+        scaleX(-1);
+    }
+
+
+    /* =========================================
+       HAND CANVAS
+    ========================================= */
+
+    #canvas {
+
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      transform:
+        scaleX(-1);
+
+      pointer-events: none;
+    }
+
+
+    /* =========================================
+       CAMERA DECOR
+    ========================================= */
+
+    .camera-top {
+
+      position: absolute;
+
+      top: 20px;
+
+      left: 22px;
+
+      right: 22px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      z-index: 20;
+    }
+
+
+    .live-pill {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        8px
+        13px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(35, 23, 19, 0.65);
+
+      color: white;
+
+      font-size: 11px;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+
+      backdrop-filter:
+        blur(10px);
+    }
+
+
+    .live-dot {
+
+      width: 8px;
+
+      height: 8px;
+
+      border-radius: 50%;
+
+      background:
+        #a99a82;
+    }
+
+
+    .live-dot.active {
+
+      background:
+        #b9d27b;
+
+      box-shadow:
+        0 0 12px
+        #b9d27b;
+    }
+
+
+    .camera-number {
+
+      color: white;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 20px;
+
+      opacity: 0.85;
+    }
+
+
+    /* =========================================
+       LETTER OVERLAY
+    ========================================= */
+
+    .letter-overlay {
+
+      position: absolute;
+
+      inset: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      pointer-events: none;
+
+      z-index: 15;
+    }
+
+
+    .detected-letter {
+
+      width: 155px;
+
+      height: 155px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 50%;
+
+      border:
+        2px solid
+        rgba(255,255,255,0.75);
+
+      background:
+        rgba(246,234,213,0.90);
+
+      color:
+        var(--wine);
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 105px;
+
+      font-weight: 600;
+
+      line-height: 1;
+
+      box-shadow:
+        0 20px 50px
+        rgba(0,0,0,0.28);
+
+      backdrop-filter:
+        blur(12px);
+
+      opacity: 0;
+
+      transform:
+        scale(0.75);
+
+      transition:
+        opacity 0.22s ease,
+        transform 0.22s ease;
+    }
+
+
+    .detected-letter.visible {
+
+      opacity: 1;
+
+      transform:
+        scale(1);
+    }
+
+
+    /* =========================================
+       CAMERA CONTROLS
+    ========================================= */
+
+    .camera-controls {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 20px;
+
+      padding:
+        18px
+        22px;
+
+      background:
+        var(--brown);
+
+      border-radius:
+        0 0 18px 18px;
+    }
+
+
+    .camera-status {
+
+      color:
+        #e7d8c6;
+
+      font-size: 13px;
+    }
+
+
+    .camera-status strong {
+
+      color:
+        #fff4df;
+    }
+
+
+    .buttons {
+
+      display: flex;
+
+      gap: 10px;
+    }
+
+
+    button {
+
+      border: none;
+
+      padding:
+        12px
+        20px;
+
+      border-radius:
+        999px;
+
+      font-family:
+        "DM Sans",
+        sans-serif;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+
+    button:hover {
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    #startButton {
+
+      color: white;
+
+      background:
+        var(--terracotta);
+
+      box-shadow:
+        4px 4px 0
+        var(--terracotta-dark);
+    }
+
+
+    #stopButton {
+
+      color:
+        #eadcc9;
+
+      background:
+        transparent;
+
+      border:
+        1px solid
+        rgba(255,255,255,0.25);
+    }
+
+
+    button:disabled {
+
+      opacity: 0.4;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+
+    /* =========================================
+       FEATURE CARDS
+    ========================================= */
+
+    .feature-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 18px;
+
+      margin-top: 28px;
+    }
+
+
+    .feature {
+
+      position: relative;
+
+      padding: 27px;
+
+      min-height: 180px;
+
+      border:
+        1px solid
+        rgba(100,45,45,0.18);
+
+      border-radius: 20px;
+
+      background:
+        rgba(255,248,233,0.76);
+
+      box-shadow:
+        5px 6px 0
+        rgba(104,112,74,0.10);
+
+      overflow: hidden;
+    }
+
+
+    .feature:nth-child(2) {
+
+      background:
+        var(--olive);
+
+      color: white;
+    }
+
+
+    .feature:nth-child(3) {
+
+      background:
+        var(--mustard);
+
+      color:
+        var(--brown);
+    }
+
+
+    .feature-number {
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 45px;
+
+      opacity: 0.25;
+    }
+
+
+    .feature h3 {
+
+      margin:
+        10px
+        0
+        8px;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 30px;
+
+      font-weight: 600;
+    }
+
+
+    .feature p {
+
+      margin: 0;
+
+      font-size: 13px;
+
+      line-height: 1.65;
+
+      opacity: 0.78;
+    }
+
+
+    /* =========================================
+       ALPHABET
+    ========================================= */
+
+    .alphabet-section {
+
+      margin-top: 75px;
+    }
+
+
+    .section-header {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: end;
+
+      margin-bottom: 22px;
+    }
+
+
+    .section-header h2 {
+
+      margin: 0;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 55px;
+
+      font-weight: 500;
+
+      color:
+        var(--wine);
+    }
+
+
+    .section-header span {
+
+      color:
+        var(--brown-light);
+
+      font-size: 12px;
+
+      letter-spacing: 0.15em;
+
+      text-transform: uppercase;
+    }
+
+
+    .alphabet {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(13, 1fr);
+
+      gap: 8px;
+    }
+
+
+    .letter-tile {
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      aspect-ratio: 1;
+
+      border:
+        1px solid
+        rgba(100,45,45,0.18);
+
+      border-radius: 13px;
+
+      background:
+        rgba(255,248,233,0.75);
+
+      color:
+        var(--wine);
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 25px;
+
+      font-weight: 600;
+
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+    }
+
+
+    .letter-tile:hover {
+
+      transform:
+        translateY(-4px)
+        rotate(-2deg);
+
+      background:
+        var(--terracotta);
+
+      color: white;
+    }
+
+
+    .letter-tile.active {
+
+      background:
+        var(--terracotta);
+
+      color: white;
+
+      transform:
+        translateY(-5px)
+        rotate(-2deg);
+
+      box-shadow:
+        5px 7px 0
+        var(--wine);
+    }
+
+
+    /* =========================================
+       EXPLANATION
+    ========================================= */
+
+    .about {
+
+      position: relative;
+
+      margin-top: 70px;
+
+      padding: 50px;
+
+      border-radius: 30px;
+
+      background:
+        var(--wine);
+
+      color:
+        #f8ead7;
+
+      overflow: hidden;
+    }
+
+
+    .about::after {
+
+      content: "✦";
+
+      position: absolute;
+
+      right: 35px;
+
+      bottom: -35px;
+
+      font-size: 180px;
+
+      color:
+        rgba(255,255,255,0.06);
+    }
+
+
+    .about h2 {
+
+      margin: 0 0 15px;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 50px;
+
+      font-weight: 500;
+    }
+
+
+    .about p {
+
+      max-width: 750px;
+
+      margin: 0;
+
+      color:
+        #d9c7b3;
+
+      line-height: 1.8;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    footer {
+
+      padding:
+        45px
+        0
+        10px;
+
+      text-align: center;
+
+      color:
+        var(--brown-light);
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 19px;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 850px) {
+
+      .feature-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .alphabet {
+
+        grid-template-columns:
+          repeat(7, 1fr);
+      }
+
+
+      .camera-controls {
+
+        flex-direction: column;
+
+        align-items: stretch;
+      }
+
+
+      .buttons {
+
+        justify-content: center;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .page {
+
+        width: 94%;
+      }
+
+
+      header {
+
+        align-items: flex-start;
+      }
+
+
+      .header-tag {
+
+        display: none;
+      }
+
+
+      .hero {
+
+        padding-top: 50px;
+      }
+
+
+      .camera-wrapper {
+
+        padding: 7px;
+
+        border-radius: 22px;
+      }
+
+
+      .camera {
+
+        border-radius: 16px;
+
+        aspect-ratio: 4 / 3;
+      }
+
+
+      .detected-letter {
+
+        width: 105px;
+
+        height: 105px;
+
+        font-size: 70px;
+      }
+
+
+      .alphabet {
+
+        grid-template-columns:
+          repeat(6, 1fr);
+      }
+
+
+      .about {
+
+        padding: 30px;
+      }
+
+
+      .about h2 {
+
+        font-size: 40px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- Decorative elements -->
+
+  <div class="leaf one">🍂</div>
+  <div class="leaf two">🌿</div>
+  <div class="leaf three">🍁</div>
+
+
+  <div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+      <div class="brand">
+
+        <div class="brand-mark">
+          S
+        </div>
+
+        <div class="brand-name">
+          segno<span>.</span>
+        </div>
+
+      </div>
+
+
+      <div class="header-tag">
+        American Sign Language
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+      <div class="eyebrow">
+        A visual language
+      </div>
+
+
+      <h1>
+        Sign <em>it.</em><br>
+        See <em>it.</em>
+      </h1>
+
+
+      <div class="ornament">
+        ✦
+      </div>
+
+
+      <p>
+        A visual ASL alphabet experience inspired by
+        the warmth, texture and romance of an
+        Italian autumn.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         CAMERA
+    ========================== -->
+
+    <section class="camera-wrapper">
+
+
+      <div class="camera">
+
+
+        <!-- Camera -->
+
+        <video
+          id="video"
+          autoplay
+          playsinline
+        ></video>
+
+
+        <!-- Hand tracking -->
+
+        <canvas
+          id="canvas"
+        ></canvas>
+
+
+        <!-- Letter -->
+
+        <div class="letter-overlay">
+
+          <div
+            id="detectedLetter"
+            class="detected-letter"
+          >
+            A
+          </div>
+
+        </div>
+
+
+        <!-- Camera top -->
+
+        <div class="camera-top">
+
+          <div class="live-pill">
+
+            <span
+              id="liveDot"
+              class="live-dot"
+            ></span>
+
+            <span id="statusText">
+              Camera off
+            </span>
+
+          </div>
+
+
+          <div class="camera-number">
+            01
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- Controls -->
+
+      <div class="camera-controls">
+
+
+        <div
+          class="camera-status"
+          id="cameraMessage"
+        >
+          <strong>
+            Ready when you are.
+          </strong>
+          Place your hand inside the frame.
+        </div>
+
+
+        <div class="buttons">
+
+          <button
+            id="startButton"
+            onclick="startCamera()"
+          >
+            Start camera
+          </button>
+
+
+          <button
+            id="stopButton"
+            onclick="stopCamera()"
+            disabled
+          >
+            Stop
+          </button>
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="feature-grid">
+
+
+      <div class="feature">
+
+        <div class="feature-number">
+          01
+        </div>
+
+        <h3>
+          See
+        </h3>
+
+        <p>
+          Your webcam captures your hand
+          in real time while the tracker
+          follows its movement.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-number">
+          02
+        </div>
+
+        <h3>
+          Sign
+        </h3>
+
+        <p>
+          Form an ASL handshape inside
+          the camera frame.
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="feature-number">
+          03
+        </div>
+
+        <h3>
+          Discover
+        </h3>
+
+        <p>
+          The recognized letter appears
+          directly over the camera.
+        </p>
+
+      </div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ALPHABET
+    ========================== -->
+
+    <section class="alphabet-section">
+
+
+      <div class="section-header">
+
+        <h2>
+          The alphabet
+        </h2>
+
+        <span>
+          A — Z
+        </span>
+
+      </div>
+
+
+      <div
+        id="alphabet"
+        class="alphabet"
+      ></div>
+
+
+    </section>
+
+
+    <!-- =========================
+         ABOUT
+    ========================== -->
+
+    <section class="about">
+
+      <h2>
+        A different way to learn.
+      </h2>
+
+      <p>
+        Segno is designed around the idea that
+        learning a visual language should feel
+        visual. The camera becomes the canvas,
+        the hand becomes the input, and the
+        letter appears directly in the experience.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+      segno · made for visual learning
+
+    </footer>
+
+
+  </div>
+
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================= */
+
+    const video =
+      document.getElementById("video");
+
+    const canvas =
+      document.getElementById("canvas");
+
+    const ctx =
+      canvas.getContext("2d");
+
+
+    const detectedLetter =
+      document.getElementById(
+        "detectedLetter"
+      );
+
+
+    const statusText =
+      document.getElementById(
+        "statusText"
+      );
+
+
+    const liveDot =
+      document.getElementById(
+        "liveDot"
+      );
+
+
+    const cameraMessage =
+      document.getElementById(
+        "cameraMessage"
+      );
+
+
+    const startButton =
+      document.getElementById(
+        "startButton"
+      );
+
+
+    const stopButton =
+      document.getElementById(
+        "stopButton"
+      );
+
+
+    const alphabet =
+      document.getElementById(
+        "alphabet"
+      );
+
+
+    /* =========================================
+       CREATE ALPHABET
+    ========================================= */
+
+    const letters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
+    letters
+      .split("")
+      .forEach(letter => {
+
+        const tile =
+          document.createElement("div");
+
+        tile.className =
+          "letter-tile";
+
+        tile.id =
+          "letter-" + letter;
+
+        tile.textContent =
+          letter;
+
+        alphabet.appendChild(tile);
+
+      });
+
+
+    /* =========================================
+       CAMERA STATE
+    ========================================= */
+
+    let stream = null;
+
+    let running = false;
+
+    let processing = false;
+
+    let lastProcessTime = 0;
+
+
+    /*
+      15 FPS for MediaPipe.
+
+      The webcam itself can still display
+      smoothly while MediaPipe processes
+      fewer frames.
+    */
+
+    const PROCESS_INTERVAL = 66;
+
+
+
+    /* =========================================
+       MEDIAPIPE
+    ========================================= */
+
+    const hands =
+      new Hands({
+
+        locateFile: file => {
+
+          return (
+            "https://cdn.jsdelivr.net/npm/@mediapipe/hands/"
+            + file
+          );
+
+        }
+
+      });
+
+
+    hands.setOptions({
+
+      maxNumHands: 1,
+
+      modelComplexity: 0,
+
+      minDetectionConfidence: 0.65,
+
+      minTrackingConfidence: 0.65
+
+    });
+
+
+
+    /* =========================================
+       MEDIAPIPE RESULTS
+    ========================================= */
+
+    hands.onResults(results => {
+
+
+      if (!video.videoWidth) {
+        return;
+      }
+
+
+      canvas.width =
+        video.videoWidth;
+
+      canvas.height =
+        video.videoHeight;
+
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      /* No hand */
+
+      if (
+        !results.multiHandLandmarks ||
+        results.multiHandLandmarks.length === 0
+      ) {
+
+        statusText.textContent =
+          "Looking for hand";
+
+        liveDot.classList.remove(
+          "active"
+        );
+
+        hideLetter();
+
+        return;
+
+      }
+
+
+      /* Hand detected */
+
+      statusText.textContent =
+        "Hand detected";
+
+      liveDot.classList.add(
+        "active"
+      );
+
+
+      const landmarks =
+        results.multiHandLandmarks[0];
+
+
+      /* Draw connections */
+
+      drawConnectors(
+
+        ctx,
+
+        landmarks,
+
+        HAND_CONNECTIONS,
+
+        {
+
+          color:
+            "rgba(244, 210, 165, 0.9)",
+
+          lineWidth: 3
+
+        }
+
+      );
+
+
+      /* Draw points */
+
+      drawLandmarks(
+
+        ctx,
+
+        landmarks,
+
+        {
+
+          color:
+            "#fff4df",
+
+          lineWidth: 2,
+
+          radius: 4
+
+        }
+
+      );
+
+
+      /*
+        Temporary gesture classifier.
+
+        This is deliberately kept simple.
+        A real A-Z classifier should replace
+        this function.
+      */
+
+      const letter =
+        recognizeGesture(
+          landmarks
+        );
+
+
+      if (letter) {
+
+        showLetter(letter);
+
+      }
+
+    });
+
+
+
+    /* =========================================
+       SHOW LETTER
+    ========================================= */
+
+    function showLetter(letter) {
+
+      detectedLetter.textContent =
+        letter;
+
+      detectedLetter.classList.add(
+        "visible"
+      );
+
+
+      document
+        .querySelectorAll(
+          ".letter-tile"
+        )
+        .forEach(tile => {
+
+          tile.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      const tile =
+        document.getElementById(
+          "letter-" + letter
+        );
+
+
+      if (tile) {
+
+        tile.classList.add(
+          "active"
+        );
+
+      }
+
+
+      cameraMessage.innerHTML =
+        "<strong>Detected:</strong> "
+        + letter;
+
+    }
+
+
+
+    /* =========================================
+       HIDE LETTER
+    ========================================= */
+
+    function hideLetter() {
+
+      detectedLetter.classList.remove(
+        "visible"
+      );
+
+
+      document
+        .querySelectorAll(
+          ".letter-tile"
+        )
+        .forEach(tile => {
+
+          tile.classList.remove(
+            "active"
+          );
+
+        });
+
+
+      cameraMessage.innerHTML =
+        "<strong>Ready when you are.</strong> "
+        + "Place your hand inside the frame.";
+
+    }
+
+
+
+    /* =========================================
+       START CAMERA
+    ========================================= */
+
+    async function startCamera() {
+
+      try {
+
+
+        stream =
+          await navigator
+            .mediaDevices
+            .getUserMedia({
+
+              video: {
+
+                width: {
+                  ideal: 1280
+                },
+
+                height: {
+                  ideal: 720
+                },
+
+                facingMode:
+                  "user"
+
+              },
+
+              audio: false
+
+            });
+
+
+        video.srcObject =
+          stream;
+
+
+        running = true;
+
+
+        startButton.disabled =
+          true;
+
+        stopButton.disabled =
+          false;
+
+
+        statusText.textContent =
+          "Starting";
+
+
+        cameraMessage.innerHTML =
+          "<strong>Camera on.</strong> "
+          + "Place your hand inside the frame.";
+
+
+        video.onloadedmetadata =
+          () => {
+
+            video.play();
+
+            requestAnimationFrame(
+              processVideo
+            );
+
+          };
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        statusText.textContent =
+          "Camera error";
+
+
+        cameraMessage.innerHTML =
+          "<strong>Camera access failed.</strong> "
+          + "Please allow camera access.";
+
+      }
+
+    }
+
+
+
+    /* =========================================
+       STOP CAMERA
+    ========================================= */
+
+    function stopCamera() {
+
+      running = false;
+
+
+      if (stream) {
+
+        stream
+          .getTracks()
+          .forEach(track => {
+
+            track.stop();
+
+          });
+
+      }
+
+
+      stream = null;
+
+      video.srcObject = null;
+
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
+
+
+      startButton.disabled =
+        false;
+
+      stopButton.disabled =
+        true;
+
+
+      statusText.textContent =
+        "Camera off";
+
+
+      liveDot.classList.remove(
+        "active"
+      );
+
+
+      cameraMessage.innerHTML =
+        "<strong>Ready when you are.</strong> "
+        + "Place your hand inside the frame.";
+
+
+      hideLetter();
+
+    }
+
+
+
+    /* =========================================
+       SMOOTH VIDEO PROCESSING
+    ========================================= */
+
+    async function processVideo(timestamp) {
+
+
+      if (!running) {
+        return;
+      }
+
+
+      if (
+        timestamp - lastProcessTime
+        >= PROCESS_INTERVAL
+      ) {
+
+
+        lastProcessTime =
+          timestamp;
+
+
+        if (
+          !processing &&
+          video.readyState >= 2 &&
+          video.videoWidth > 0
+        ) {
+
+
+          processing = true;
+
+
+          try {
+
+            await hands.send({
+              image: video
+            });
+
+          } catch (error) {
+
+            console.error(
+              "MediaPipe:",
+              error
+            );
+
+          }
+
+
+          processing = false;
+
+        }
+
+      }
+
+
+      requestAnimationFrame(
+        processVideo
+      );
+
+    }
+
+
+
+    /* =========================================
+       PROTOTYPE GESTURE RECOGNITION
+    =========================================
+
+       IMPORTANT:
+
+       This does NOT represent a complete
+       ASL alphabet classifier.
+
+       It only demonstrates the interface.
+
+    ========================================= */
+
+    function recognizeGesture(
+      landmarks
+    ) {
+
+
+      const indexUp =
+        landmarks[8].y <
+        landmarks[6].y;
+
+
+      const middleUp =
+        landmarks[12].y <
+        landmarks[10].y;
+
+
+      const ringUp =
+        landmarks[16].y <
+        landmarks[14].y;
+
+
+      const pinkyUp =
+        landmarks[20].y <
+        landmarks[18].y;
+
+
+
+      /*
+        Open hand
+      */
+
+      if (
+        indexUp &&
+        middleUp &&
+        ringUp &&
+        pinkyUp
+      ) {
+
+        return "B";
+
+      }
+
+
+      /*
+        Two fingers
+      */
+
+      if (
+        indexUp &&
+        middleUp &&
+        !ringUp &&
+        !pinkyUp
+      ) {
+
+        return "V";
+
+      }
+
+
+      /*
+        Index finger
+      */
+
+      if (
+        indexUp &&
+        !middleUp &&
+        !ringUp &&
+        !pinkyUp
+      ) {
+
+        return "D";
+
+      }
+
+
+      /*
+        Closed fist
+      */
+
+      if (
+        !indexUp &&
+        !middleUp &&
+        !ringUp &&
+        !pinkyUp
+      ) {
+
+        return "A";
+
+      }
+
+
+      return null;
+
+    }
+
+  </script>
+
+</body>
+
+</html>
