@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact — Between the Bells</title>
+    <meta
+      name="description"
+      content="Pitch an episode idea, suggest a guest or join the Between the Bells team. Reach the student podcast of Riverside High."
+    />
+    <meta name="theme-color" content="#f7f2e8" />
+    <meta property="og:title" content="Contact — Between the Bells" />
+    <meta property="og:description" content="Pitch a story, suggest a guest or join the student podcast team." />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23ff5a36'/%3E%3Cg stroke='%23171320' stroke-width='6' stroke-linecap='round'%3E%3Cpath d='M16 28v8M24 20v24M32 14v36M40 20v24M48 28v8'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <script type="module" src="/assets/js/site.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="/" aria-label="Between the Bells — home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4M8 6.5v11M12 3.5v17M16 6.5v11M20 10v4" /></svg>
+          </span>
+          <span class="brand__name">Between the Bells</span>
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          data-nav-toggle
+        >
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Main">
+          <a href="/">Home</a>
+          <a href="/episodes.html">Episodes</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html" aria-current="page">Contact</a>
+          <a class="btn btn--primary btn--sm site-nav__cta" href="/episodes.html">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5.3c0-.6.7-1 1.2-.7l9.4 6c.5.3.5 1 0 1.3l-9.4 6c-.5.3-1.2 0-1.2-.7V5.3Z" /></svg>
+            Listen now
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="page-hero">
+        <div class="container">
+          <p class="eyebrow">Contact</p>
+          <h1>Say hi.<br /><em>Pitch a story.</em></h1>
+          <p class="page-hero__lead">
+            Got a question nobody is asking, a guest we should book, or you just
+            want a turn at the mic? We read every message ourselves.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 1rem">
+        <div class="container">
+          <div class="contact-grid">
+            <div class="form-card" data-reveal>
+              <h2>Send us a message</h2>
+              <p class="form-card__lead">
+                Tell us what’s on your mind. A student on the team will reply —
+                usually within two school days.
+              </p>
+              <form class="fields" data-contact-form novalidate>
+                <div class="field-row">
+                  <div class="field">
+                    <label for="name">Your name</label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      autocomplete="name"
+                      placeholder="Ada Lovelace"
+                      aria-describedby="name-error"
+                      data-field
+                    />
+                    <p class="field__error" id="name-error" aria-live="polite"></p>
+                  </div>
+                  <div class="field">
+                    <label for="email">Email</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      placeholder="you@school.edu"
+                      aria-describedby="email-error"
+                      data-field
+                    />
+                    <p class="field__error" id="email-error" aria-live="polite"></p>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="topic">What’s this about?</label>
+                  <select id="topic" name="topic" aria-describedby="topic-error" data-field>
+                    <option value="">Choose a topic…</option>
+                    <option>Episode idea</option>
+                    <option>Guest pitch</option>
+                    <option>Join the team</option>
+                    <option>Feedback on an episode</option>
+                    <option>Something else</option>
+                  </select>
+                  <p class="field__error" id="topic-error" aria-live="polite"></p>
+                </div>
+                <div class="field">
+                  <label for="message">Your message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    placeholder="Tell us the story in a sentence or two…"
+                    aria-describedby="message-error"
+                    data-field
+                  ></textarea>
+                  <p class="field__error" id="message-error" aria-live="polite"></p>
+                </div>
+                <div class="form-actions">
+                  <button class="btn btn--primary" type="submit">
+                    Send message
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+                  </button>
+                  <p class="form-note">No newsletters, no spam — just a reply.</p>
+                </div>
+              </form>
+              <div class="form-success" tabindex="-1" data-form-success>
+                <h3>Thanks — message noted.</h3>
+                <p>
+                  We’ll get back to you within two school days. If it’s urgent,
+                  catch us in Room 214 on Thursday afternoon.
+                </p>
+                <button class="btn btn--ghost btn--sm" type="button" data-form-reset>
+                  Send another message
+                </button>
+              </div>
+            </div>
+
+            <div class="info-stack" data-reveal>
+              <div class="info-card">
+                <span class="info-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" /></svg>
+                </span>
+                <div>
+                  <p class="info-card__label">Email us</p>
+                  <p class="info-card__value">
+                    <a href="mailto:hello@betweenthebells.fm">hello@betweenthebells.fm</a>
+                  </p>
+                </div>
+              </div>
+              <div class="info-card">
+                <span class="info-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z" /><circle cx="12" cy="10" r="2.6" /></svg>
+                </span>
+                <div>
+                  <p class="info-card__label">Find us</p>
+                  <p class="info-card__value">Room 214, Media Lab<br />Riverside High</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <span class="info-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7.5V12l3 2" /></svg>
+                </span>
+                <div>
+                  <p class="info-card__label">Meetings</p>
+                  <p class="info-card__value">Thursdays · 3:30–4:30 pm<br />Everyone welcome</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <span class="info-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" /><circle cx="12" cy="12" r="3.2" /></svg>
+                </span>
+                <div>
+                  <p class="info-card__label">Follow along</p>
+                  <p class="info-card__value">@betweenthebells<br />Instagram · TikTok</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq" data-reveal>
+            <details>
+              <summary>Can I be a guest on the show?</summary>
+              <p>
+                Yes. Students, teachers, parents and neighbours have all been on.
+                Pitch yourself in the form above — one sentence is enough to
+                start.
+              </p>
+            </details>
+            <details>
+              <summary>Do I need experience to join the team?</summary>
+              <p>
+                None at all. We teach recording, editing, interviewing and
+                research on the job. Come to a Thursday meeting and see if you
+                like it.
+              </p>
+            </details>
+            <details>
+              <summary>Can I use your episodes for a class project?</summary>
+              <p>
+                Go ahead — just credit Between the Bells and the episode number.
+                For anything bigger than a school project, email us first.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="site-footer__top">
+          <div class="site-footer__brand">
+            <a class="brand" href="/" aria-label="Between the Bells — home">
+              <span class="brand__mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 10v4M8 6.5v11M12 3.5v17M16 6.5v11M20 10v4" /></svg>
+              </span>
+              <span class="brand__name">Between the Bells</span>
+            </a>
+            <p>
+              The student-led podcast of Riverside High. Recorded in Room 214,
+              edited late, released every other Friday.
+            </p>
+          </div>
+          <nav class="site-footer__col" aria-label="Footer">
+            <p class="site-footer__label">Explore</p>
+            <a href="/">Home</a>
+            <a href="/episodes.html">Episodes</a>
+            <a href="/about.html">About us</a>
+            <a href="/contact.html">Contact</a>
+          </nav>
+          <div class="site-footer__col">
+            <p class="site-footer__label">Say hello</p>
+            <a href="mailto:hello@betweenthebells.fm">hello@betweenthebells.fm</a>
+            <p>Room 214 · Media Lab</p>
+            <p>Thursdays, 3:30 pm</p>
+          </div>
+        </div>
+        <div class="site-footer__bottom">
+          <p>© 2026 Between the Bells. Made by students, for students.</p>
+          <p>Riverside High · Season 2</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
