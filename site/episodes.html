@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Episodes — Between the Bells</title>
+  <meta name="description" content="Every episode of Between the Bells, the student podcast of Northfield High. Press play, scrub around, and tell us what we got wrong.">
+  <meta name="theme-color" content="#16101f">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="episodes">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-open="false">
+    <div class="wrap header__inner">
+      <a class="brand" href="index.html" aria-label="Between the Bells — home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2.6a5.4 5.4 0 0 0-5.4 5.4v3.3l-1.7 3.2a1 1 0 0 0 .9 1.5h12.4a1 1 0 0 0 .9-1.5l-1.7-3.2V8A5.4 5.4 0 0 0 12 2.6Zm0 18.8a2.8 2.8 0 0 0 2.6-1.8H9.4a2.8 2.8 0 0 0 2.6 1.8Z"/></svg>
+        </span>
+        <span class="brand__text">Between <em>the</em> Bells</span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="episodes.html" aria-current="page">Episodes</a>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="btn btn--pill header__cta" href="#ep-08">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-play"><path d="M8 5.5v13a1 1 0 0 0 1.53.85l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5Z"/></svg>
+        Listen now
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap page-hero__inner">
+        <div>
+          <p class="kicker">The archive · Season 3</p>
+          <h1>Every episode,<br><em>start to finish.</em></h1>
+          <p class="lede">Eight episodes this season, all recorded in Room 214. Press play, scrub around, and tell us what we got wrong.</p>
+        </div>
+        <div class="page-hero__badge" aria-hidden="true">
+          <span>S3</span>
+          <small>2026</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="wrap">
+        <div class="toolbar">
+          <div class="chips" id="filter-chips" role="group" aria-label="Filter episodes by theme"></div>
+          <div class="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 1 0 4.6 13.4l4.2 4.2 1.4-1.4-4.2-4.2A7.5 7.5 0 0 0 10.5 3Zm0 2a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Z"/></svg>
+            <label class="sr-only" for="episode-search">Search episodes</label>
+            <input id="episode-search" type="search" placeholder="Search episodes, guests, topics" autocomplete="off">
+          </div>
+        </div>
+
+        <p class="result-count" id="episode-count" aria-live="polite"></p>
+        <div class="episode-list" id="episode-list"></div>
+        <p class="empty-state" id="episode-empty" hidden>Nothing here yet — try another theme or a shorter search.</p>
+      </div>
+    </section>
+
+    <section class="section section--ink">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">Upcoming</p>
+            <h2>What's coming next</h2>
+          </div>
+          <a class="link-arrow link-arrow--light" href="contact.html?topic=Guest%20pitch">Pitch a topic <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="upcoming-grid" id="upcoming-list"></div>
+        <p class="upcoming-note">Recording dates move when exams do. Follow <strong>@betweenthebells</strong> for the final word.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <a class="brand brand--light" href="index.html">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2.6a5.4 5.4 0 0 0-5.4 5.4v3.3l-1.7 3.2a1 1 0 0 0 .9 1.5h12.4a1 1 0 0 0 .9-1.5l-1.7-3.2V8A5.4 5.4 0 0 0 12 2.6Zm0 18.8a2.8 2.8 0 0 0 2.6-1.8H9.4a2.8 2.8 0 0 0 2.6 1.8Z"/></svg>
+          </span>
+          <span class="brand__text">Between <em>the</em> Bells</span>
+        </a>
+        <p>A student podcast from Northfield High. Recorded in Room 214, edited between classes.</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Footer">
+        <h3>Explore</h3>
+        <a href="index.html">Home</a>
+        <a href="episodes.html">Episodes</a>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="footer__col">
+        <h3>Find us</h3>
+        <p>Room 214, Fridays at lunch</p>
+        <p><a href="mailto:hello@betweenthebells.fm">hello@betweenthebells.fm</a></p>
+        <p>@betweenthebells</p>
+      </div>
+
+      <div class="footer__col">
+        <h3>Season 3</h3>
+        <p>New episodes every other Friday</p>
+        <p>24 episodes since 2022</p>
+      </div>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© <span data-year>2026</span> Between the Bells · Student-run, student-funded.</p>
+      <p>Made in Room 214.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="assets/js/episodes.js"></script>
+</body>
+</html>
