@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="The Student Voice">
+  <rect width="64" height="64" rx="16" fill="#17131F"/>
+  <g fill="none" stroke="#FAF4EC" stroke-width="5" stroke-linecap="round">
+    <path d="M14 27v10"/>
+    <path d="M23 19v26"/>
+    <path d="M32 12v40" stroke="#FF5A3C"/>
+    <path d="M41 21v22"/>
+    <path d="M50 27v10"/>
+  </g>
+</svg>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr" class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proposer un sujet — The Student Voice</title>
+  <meta name="description" content="Proposez un sujet, un invité ou un témoignage pour le podcast The Student Voice. Une idée suffit : l'équipe s'occupe du reste." />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&family=Inter:wght@400..600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+</head>
+<body class="page-proposer">
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="The Student Voice — Accueil">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+            <path d="M4 10v4" /><path d="M8 6v12" /><path d="M12 3v18" /><path d="M16 7v10" /><path d="M20 10v4" />
+          </svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">The Student Voice</span>
+          <span class="brand__sub">Le podcast des élèves</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navigation principale">
+        <a href="index.html">Accueil</a>
+        <a href="episodes.html">Nos épisodes</a>
+        <a href="about.html">À propos</a>
+        <a href="proposer.html" aria-current="page">Proposer un sujet</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="btn btn--primary btn--sm" href="episodes.html">Écouter</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow" data-reveal><span class="eyebrow__dot"></span>Participer</p>
+        <h1 data-reveal>Proposer un sujet</h1>
+        <p class="page-hero__lead" data-reveal>
+          Une question qui vous turlupine&nbsp;? Un invité à nous recommander&nbsp;?
+          Une histoire à raconter&nbsp;? C'est ici que ça commence — et pas besoin
+          d'être dans l'équipe pour avoir une bonne idée.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container form-layout">
+        <div class="form-card">
+          <h2>Votre idée en quelques lignes</h2>
+          <p class="form-card__intro">
+            Pas besoin d'un dossier parfait : une idée claire et deux ou trois phrases suffisent.
+            Nous lisons chaque proposition avant la réunion de rédaction du mardi.
+          </p>
+
+          <form class="form" data-form="proposer" data-mail-subject="Proposition de sujet — The Student Voice" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="proposer-name">Prénom et nom</label>
+                <input id="proposer-name" name="nom" type="text" autocomplete="name" required data-validate data-label="Nom" />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="proposer-class">Classe</label>
+                <input id="proposer-class" name="classe" type="text" placeholder="ex. 2nde B" required data-validate data-label="Classe" />
+                <span class="field__error"></span>
+              </div>
+              <div class="field field--full">
+                <label for="proposer-email">Adresse e-mail</label>
+                <input id="proposer-email" name="email" type="email" autocomplete="email" placeholder="prenom.nom@exemple.fr" required data-validate data-label="E-mail" />
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="proposer-type">Type de proposition</label>
+                <select id="proposer-type" name="type" required data-validate data-label="Type">
+                  <option value="" selected disabled>Choisissez…</option>
+                  <option>Un sujet d'épisode</option>
+                  <option>Un invité à interviewer</option>
+                  <option>Un témoignage</option>
+                  <option>Une autre idée</option>
+                </select>
+                <span class="field__error"></span>
+              </div>
+              <div class="field">
+                <label for="proposer-category">Catégorie</label>
+                <select id="proposer-category" name="categorie" required data-validate data-label="Catégorie">
+                  <option value="" selected disabled>Choisissez…</option>
+                  <option>Vie scolaire</option>
+                  <option>Culture</option>
+                  <option>Sciences</option>
+                  <option>Interviews</option>
+                  <option>Opinions</option>
+                  <option>Je ne sais pas encore</option>
+                </select>
+                <span class="field__error"></span>
+              </div>
+              <div class="field field--full">
+                <label for="proposer-title">Titre de votre idée</label>
+                <input id="proposer-title" name="titre" type="text" placeholder="En une phrase, de quoi voulez-vous parler ?" required data-validate data-label="Titre de l'idée" />
+                <span class="field__error"></span>
+              </div>
+              <div class="field field--full">
+                <label for="proposer-message">Votre idée</label>
+                <textarea id="proposer-message" name="message" rows="6" placeholder="Expliquez-nous le sujet, la personne à inviter ou l'expérience à raconter. Pourquoi cela vous semble important ?" required data-validate data-minlength="20" data-label="Idée"></textarea>
+                <span class="field__error"></span>
+              </div>
+              <div class="field field--check field--full">
+                <input id="proposer-consent" name="accord" type="checkbox" required data-validate data-label="Accord de recontact" />
+                <label for="proposer-consent">J'accepte que l'équipe du podcast me recontacte au sujet de cette proposition.</label>
+                <span class="field__error"></span>
+              </div>
+            </div>
+
+            <div class="form__actions">
+              <button class="btn btn--primary" type="submit">Envoyer ma proposition</button>
+              <p class="form__note">Vos informations servent uniquement à vous répondre. Aucun partage, aucune pub.</p>
+            </div>
+          </form>
+
+          <div class="form-success" data-form-success="proposer" hidden>
+            <div class="form-success__icon" aria-hidden="true">✓</div>
+            <h3 tabindex="-1">Merci ! Votre proposition est prête.</h3>
+            <p>
+              Pour qu'elle arrive dans notre boîte à idées, envoyez-la depuis votre messagerie :
+              le message est déjà rempli avec vos réponses.
+            </p>
+            <div class="form-success__actions">
+              <a class="btn btn--primary" data-mailto href="#">Envoyer par e-mail</a>
+              <button class="btn btn--ghost" type="button" data-form-reset>Revenir au formulaire</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="form-aside">
+          <div class="aside-card">
+            <h3>Comment ça marche</h3>
+            <ol class="steps">
+              <li><span><strong>Vous envoyez votre idée</strong>Une phrase ou deux suffisent.</span></li>
+              <li><span><strong>On en discute en équipe</strong>Chaque mardi, on trie les propositions et on prépare les prochains épisodes.</span></li>
+              <li><span><strong>On vous répond</strong>Sous deux semaines, pour vous dire si l'idée part en production.</span></li>
+            </ol>
+          </div>
+
+          <div class="aside-card aside-card--accent">
+            <h3>Quelques pistes</h3>
+            <ul class="idea-list">
+              <li>Le harcèlement vu par les élèves</li>
+              <li>La cantine idéale, on la imagine comment&nbsp;?</li>
+              <li>Un professeur au parcours inattendu</li>
+              <li>Nos séries et livres de l'année</li>
+              <li>Le sport au lycée : passion ou obligation&nbsp;?</li>
+            </ul>
+          </div>
+
+          <div class="aside-card">
+            <h3>Une question&nbsp;?</h3>
+            <p>Écrivez-nous à <a href="mailto:contact@thestudentvoice.org"><strong>contact@thestudentvoice.org</strong></a> ou passez nous voir au CDI, salle 204.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="The Student Voice — Accueil">
+            <span class="brand__mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                <path d="M4 10v4" /><path d="M8 6v12" /><path d="M12 3v18" /><path d="M16 7v10" /><path d="M20 10v4" />
+              </svg>
+            </span>
+            <span class="brand__text">
+              <span class="brand__name">The Student Voice</span>
+              <span class="brand__sub">Le podcast des élèves</span>
+            </span>
+          </a>
+          <p class="footer__baseline">Des conversations vraies, enregistrées dans les murs du lycée. Un micro ouvert sur ce que nous vivons.</p>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__title">Le podcast</h3>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="episodes.html">Nos épisodes</a></li>
+            <li><a href="about.html">À propos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__title">Participer</h3>
+          <ul>
+            <li><a href="proposer.html">Proposer un sujet</a></li>
+            <li><a href="contact.html">Nous contacter</a></li>
+            <li><a href="about.html#equipe">Rejoindre l'équipe</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__contact">
+          <h3 class="footer__title">Restons en contact</h3>
+          <ul>
+            <li><a href="mailto:contact@thestudentvoice.org">contact@thestudentvoice.org</a></li>
+          </ul>
+          <div class="footer__socials">
+            <span class="footer__social">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+              @thestudentvoice.podcast
+            </span>
+            <span class="footer__social">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" /><path d="M12 17v4" /><path d="M8 21h8" /></svg>
+              @thestudentvoice
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> The Student Voice — Fait par des élèves, pour des élèves.</span>
+        <span>Site mis à jour par l'équipe du podcast.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="assets/js/site.js"></script>
+</body>
+</html>
