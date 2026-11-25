@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monolith — An Audio Journal</title>
+  <meta name="description" content="Monolith is a quarterly audio journal of long conversations about cities, memory and the things we make. Recorded on location, edited slowly, released when it is true.">
+  <meta name="theme-color" content="#FDFCFB">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FDFCFB'/%3E%3Cpath d='M5 26V6h5.2l5.8 12.4L21.8 6H27v20h-4.3V13.6L17.4 25h-2.8L9.3 13.6V26z' fill='%23121212'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="mood" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="spine" aria-hidden="true"><span class="spine__fill"></span></div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar" id="topbar">
+    <a class="wordmark" href="#/" data-link aria-label="Monolith — home">
+      <span class="wordmark__glyph" aria-hidden="true">M</span>
+      <span class="wordmark__text">
+        <span class="wordmark__name">Monolith</span>
+        <span class="wordmark__sub">Audio journal · Est. 2021</span>
+      </span>
+    </a>
+    <nav class="topbar__nav" aria-label="Primary">
+      <a href="#/" data-link data-nav="latest">Episodes</a>
+      <a href="#/episodes" data-link data-nav="archive">Archive</a>
+    </nav>
+    <div class="topbar__actions">
+      <button class="btn btn--ghost" id="menu-open" aria-expanded="false" aria-controls="menu">Index</button>
+      <button class="btn btn--solid" data-subscribe>Subscribe</button>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1"></main>
+
+  <footer class="monolith" id="subscribe">
+    <div class="monolith__inner">
+      <p class="eyebrow eyebrow--light">The Dispatch</p>
+      <h2 class="monolith__title">Subscribe<span aria-hidden="true">.</span></h2>
+      <p class="monolith__lede">One letter every other Thursday — transcripts, field notes, and the sounds we could not fit into the episode.</p>
+      <form class="dispatch" id="dispatch" novalidate>
+        <label class="sr-only" for="email">Email address</label>
+        <input id="email" name="email" type="email" inputmode="email" placeholder="you@somewhere.earth" autocomplete="email" required>
+        <button type="submit" class="dispatch__btn">Join the list <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="dispatch__note" id="dispatch-note" role="status">No algorithms. No host-read ads. Unsubscribe in one click.</p>
+    </div>
+    <div class="monolith__foot">
+      <span>© 2026 Monolith Audio Journal</span>
+      <span class="monolith__places">Dakar · Lisbon · Detroit · Kyoto</span>
+      <span class="monolith__links">
+        <a href="#/episodes" data-link>Archive</a>
+        <a href="mailto:hello@monolith.fm">Contact</a>
+        <a href="#/" data-link>RSS</a>
+      </span>
+    </div>
+  </footer>
+
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-labelledby="menu-title" hidden>
+    <div class="menu__inner">
+      <div class="menu__top">
+        <p class="eyebrow eyebrow--light">Curated Index</p>
+        <button class="menu__close" id="menu-close" aria-label="Close index">
+          <span>Close</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+      </div>
+      <div class="menu__body">
+        <div class="menu__col">
+          <h2 class="menu__title" id="menu-title">What people<br>are <em>listening to</em></h2>
+          <ul class="menu__cats" id="menu-cats"></ul>
+        </div>
+        <div class="menu__col menu__col--right">
+          <nav class="menu__links" aria-label="Sections">
+            <a href="#/" data-link>Latest episode</a>
+            <a href="#/episodes" data-link>The archive</a>
+            <button type="button" data-subscribe>Subscribe</button>
+          </nav>
+          <div class="menu__recent">
+            <p class="eyebrow eyebrow--light">Just published</p>
+            <ul id="menu-recent"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="menu__foot">
+        <span>Dakar · Lisbon · Detroit</span>
+        <span>Independent since 2021</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="player" id="player" hidden>
+    <div class="player__bar">
+      <div class="player__now">
+        <img class="player__art" id="player-art" alt="" width="52" height="52">
+        <div class="player__ident">
+          <a class="player__title" id="player-title" href="#/" data-link>—</a>
+          <span class="player__guest" id="player-guest">—</span>
+        </div>
+      </div>
+      <div class="player__transport">
+        <button class="icon-btn" id="player-prev" aria-label="Previous episode">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h2v14H7zM19 5v14l-9-7z"/></svg>
+        </button>
+        <button class="player__play" id="player-play" aria-label="Play">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        </button>
+        <button class="icon-btn" id="player-next" aria-label="Next episode">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5h2v14h-2zM5 5v14l9-7z"/></svg>
+        </button>
+      </div>
+      <div class="player__track">
+        <canvas id="player-wave" class="player__wave" tabindex="0" role="slider" aria-label="Seek within episode" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0:00"></canvas>
+        <div class="player__times">
+          <span id="player-time">0:00</span>
+          <span class="player__sep" aria-hidden="true">/</span>
+          <span id="player-dur">0:00</span>
+        </div>
+      </div>
+      <div class="player__extras">
+        <button class="player__chapters-btn" id="player-chapters" aria-expanded="false" aria-controls="player-chapters-panel">Chapters</button>
+        <button class="icon-btn" id="player-mute" aria-label="Mute">
+          <svg class="i-vol" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg>
+          <svg class="i-mute" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12 1.5L17.5 12 15 13.5l1.5 1.5L15 16.5 16.5 15 18 16.5 19.5 15 18 13.5 19.5 12 18 10.5z"/></svg>
+        </button>
+        <button class="icon-btn" id="player-close" aria-label="Close player">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="player__panel" id="player-chapters-panel" hidden></div>
+  </div>
+
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
